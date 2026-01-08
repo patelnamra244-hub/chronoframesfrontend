@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #070a14;
+    --panel: #0f1324;
+    --border: #1e2444;
+    --text: #e7e9f1;
+    --muted: #9aa1c7;
+    --accent: #6ee7ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: radial-gradient(circle at top, #0d1224, #05070f);
+    color: var(--text);
+}
+
+/* ===== Header ===== */
+
+.site-header {
+    text-align: center;
+    padding: 90px 20px 70px;
+}
+
+.site-header h1 {
+    font-size: 3.4rem;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.site-header p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+/* ===== Layout ===== */
+
+.container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 28px 90px;
+}
+
+/* ===== Grid ===== */
+
+.tile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+}
+
+/* ===== Tiles ===== */
+
+.tile {
+    border-radius: 22px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #000;
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 35px 90px rgba(0, 0, 0, .65);
+}
+
+.tile img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+/* ===== Lightbox ===== */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 6, 14, .88);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.lightbox-card {
+    width: min(1100px, 94vw);
+    background: linear-gradient(180deg, #0f1328, #070a16);
+    border-radius: 30px;
+    padding: 30px;
+    position: relative;
+    animation: zoomIn .25s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(.96);
+        opacity: 0
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1
+    }
+}
+
+/* Close */
+.lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #a5accf;
+    cursor: pointer;
+}
+
+/* Images */
+.lightbox-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.img-box {
+    position: relative;
+}
+
+.img-box span {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(0, 0, 0, .55);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.img-box img {
+    width: 100%;
+    height: 430px;
+    object-fit: cover;
+    border-radius: 22px;
+}
+
+/* Prompt */
+.lightbox-prompt {
+    margin-top: 28px;
+}
+
+.prompt-header {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.lightbox-prompt pre {
+    background: #050816;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    color: #d4d9ff;
+}
+
+/* Button */
+.lightbox-prompt button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 18px;
+    border: none;
+    background: linear-gradient(135deg, #6ee7ff, #3b82f6);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .lightbox-images {
+        grid-template-columns: 1fr;
+    }
+
+    .img-box img {
+        height: 300px;
+    }
+
+    .site-header h1 {
+        font-size: 2.4rem;
+    }
+}

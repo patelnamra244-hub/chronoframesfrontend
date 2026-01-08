@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ChronoFiles — AI Transformations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <h1>ChronoFiles</h1>
+  <p>Curated AI photo transformation library</p>
+</header>
+
+<main class="container">
+  <section class="tile-grid" id="templateList"></section>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-card">
+
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+
+    <div class="lightbox-images">
+      <div class="img-box">
+        <span>Before</span>
+        <img id="lightboxBefore" />
+      </div>
+      <div class="img-box">
+        <span>After</span>
+        <img id="lightboxAfter" />
+      </div>
+    </div>
+
+    <div class="lightbox-prompt">
+      <div class="prompt-header">Prompt</div>
+      <pre id="lightboxPrompt"></pre>
+      <button onclick="copyPrompt()">Copy Prompt</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/user.js"></script>
+</body>
+</html>

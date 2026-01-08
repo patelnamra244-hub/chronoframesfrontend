@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>ChronoFiles Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#070a14; --panel:#0f1324; --panel2:#121735;
+  --border:#1e2444; --text:#e7e9f1; --muted:#9aa1c7;
+  --accent:#6ee7ff; --danger:#ef4444;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Inter,sans-serif;
+  background:var(--bg);color:var(--text);
+  display:flex;height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+  width:260px;padding:26px 22px;
+  background:linear-gradient(180deg,#0c1022,#070a14);
+  border-right:1px solid var(--border);
+}
+.logo{font-size:1.6rem;font-weight:700;margin-bottom:40px}
+.nav a{
+  display:block;padding:12px 14px;margin-bottom:6px;
+  border-radius:12px;color:var(--muted);
+  text-decoration:none;font-weight:500;
+}
+.nav a:hover,.nav a.active{
+  background:var(--panel2);color:var(--text);
+}
+
+/* Main */
+.main{flex:1;overflow-y:auto;padding:40px}
+.topbar{display:flex;justify-content:space-between;margin-bottom:40px}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;margin-bottom:40px;
+}
+.stat{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;padding:22px;
+}
+.stat h2{margin:0;font-size:2.2rem;color:var(--accent)}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;padding:26px;
+  margin-bottom:40px;
+}
+
+input,textarea,select{
+  width:100%;background:#050816;
+  border:1px solid var(--border);
+  color:var(--text);
+  border-radius:14px;
+  padding:12px 14px;
+  margin-bottom:14px;
+  font-family:Inter;
+}
+textarea{min-height:110px;resize:vertical}
+
+button{
+  background:linear-gradient(135deg,#6ee7ff,#3b82f6);
+  border:none;padding:12px 18px;
+  border-radius:14px;font-weight:600;
+  cursor:pointer;
+}
+button.danger{
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:#fff;
+}
+
+.template-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:22px;
+}
+.template-card{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+}
+.template-actions{
+  display:flex;gap:10px;margin-top:10px;
+}
+
+.category-row{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:8px;
+}
+
+@media(max-width:900px){
+  .sidebar{display:none}
+  .main{padding:24px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <div class="logo">ChronoFiles</div>
+  <div class="nav">
+    <a class="active">Dashboard</a>
+    <a href="#categories">Categories</a>
+    <a href="#upload">Upload</a>
+    <a href="#manage">Manage</a>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="topbar">
+    <h1>Admin Dashboard</h1>
+    <span>ChronoFiles Control Panel</span>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><h2 id="views">0</h2><p>Total Views</p></div>
+    <div class="stat"><h2 id="likes">0</h2><p>Total Likes</p></div>
+    <div class="stat"><h2 id="templates">0</h2><p>Total Templates</p></div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="card" id="categories">
+    <h3>Categories</h3>
+    <input id="newCategory" placeholder="New category name" />
+    <button onclick="addCategory()">Add Category</button>
+    <div id="categoryList" style="margin-top:16px;"></div>
+  </div>
+
+  <!-- UPLOAD -->
+  <div class="card" id="upload">
+    <h3>Add Template</h3>
+    <input id="title" placeholder="Template title" />
+    <select id="categorySelect"></select>
+    <input type="file" id="beforeImg" />
+    <input type="file" id="afterImg" />
+    <textarea id="prompt" placeholder="AI Prompt"></textarea>
+    <button onclick="uploadTemplate()">Upload Template</button>
+  </div>
+
+  <!-- MANAGE -->
+  <div class="card" id="manage">
+    <h3>Manage Templates</h3>
+    <div class="template-list" id="templateList"></div>
+  </div>
+
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
