@@ -11,6 +11,7 @@
 
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -20,113 +21,164 @@ body {
     color: var(--text);
 }
 
-/* ===== Header ===== */
+/* ===============================
+   HEADER (COMPACT FOR MOBILE)
+================================ */
 
 .site-header {
     text-align: center;
-    padding: 90px 20px 70px;
+    padding: 36px 16px 28px;
 }
 
 .site-header h1 {
-    font-size: 3.4rem;
+    font-size: 1.9rem;
     margin: 0;
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
 }
 
 .site-header p {
-    margin-top: 14px;
+    margin-top: 6px;
     color: var(--muted);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
 
-/* ===== Layout ===== */
+/* ===============================
+   LAYOUT
+================================ */
 
 .container {
-    max-width: 1250px;
-    margin: 0 auto;
-    padding: 0 28px 90px;
+    padding: 0 14px 80px;
 }
 
-/* ===== Grid ===== */
+/* ===============================
+   ANDROID GRID (SMALL TILES)
+================================ */
 
 .tile-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 
-/* ===== Tiles ===== */
+/* Tablets / larger phones */
+@media (min-width: 600px) {
+    .tile-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .tile-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
+}
+
+/* ===============================
+   TILES (THUMB-FIRST)
+================================ */
 
 .tile {
-    border-radius: 22px;
+    border-radius: 14px;
     overflow: hidden;
-    cursor: pointer;
     background: #000;
-    transition: transform .35s ease, box-shadow .35s ease;
+    cursor: pointer;
+    transition: transform 0.15s ease;
 }
 
-.tile:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 35px 90px rgba(0, 0, 0, .65);
+.tile:active {
+    transform: scale(0.96);
 }
 
 .tile img {
     width: 100%;
-    height: 380px;
+    aspect-ratio: 3 / 4;
+    /* portrait thumbnail */
     object-fit: cover;
+    display: block;
 }
 
-/* ===== Lightbox ===== */
+/* ===============================
+   LIGHTBOX (ANDROID STYLE)
+================================ */
 
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(4, 6, 14, .88);
-    backdrop-filter: blur(10px);
+    background: rgba(5, 7, 15, 0.92);
+    backdrop-filter: blur(6px);
     display: none;
-    align-items: center;
-    justify-content: center;
     z-index: 1000;
 }
 
+/* Bottom-sheet style on mobile */
 .lightbox-card {
-    width: min(1100px, 94vw);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     background: linear-gradient(180deg, #0f1328, #070a16);
-    border-radius: 30px;
-    padding: 30px;
-    position: relative;
-    animation: zoomIn .25s ease;
+    border-radius: 24px 24px 0 0;
+    padding: 16px;
+    animation: slideUp 0.25s ease;
 }
 
-@keyframes zoomIn {
+@keyframes slideUp {
     from {
-        transform: scale(.96);
-        opacity: 0
+        transform: translateY(100%);
     }
 
     to {
-        transform: scale(1);
-        opacity: 1
+        transform: translateY(0);
     }
 }
 
-/* Close */
+/* Desktop modal */
+@media (min-width: 768px) {
+    .lightbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .lightbox-card {
+        position: relative;
+        width: min(1000px, 92vw);
+        border-radius: 28px;
+        padding: 24px;
+        animation: zoomIn 0.25s ease;
+    }
+}
+
+/* ===============================
+   CLOSE BUTTON
+================================ */
+
 .lightbox-close {
     position: absolute;
-    top: 18px;
-    right: 22px;
-    font-size: 28px;
+    top: 10px;
+    right: 14px;
+    font-size: 26px;
     background: none;
     border: none;
     color: #a5accf;
     cursor: pointer;
 }
 
-/* Images */
+/* ===============================
+   IMAGES
+================================ */
+
 .lightbox-images {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    gap: 10px;
+}
+
+@media (max-width: 767px) {
+    .lightbox-images {
+        margin-top: 12px;
+    }
 }
 
 .img-box {
@@ -135,67 +187,65 @@ body {
 
 .img-box span {
     position: absolute;
-    top: 14px;
-    left: 14px;
-    background: rgba(0, 0, 0, .55);
-    padding: 6px 12px;
+    top: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 11px;
     color: #fff;
 }
 
 .img-box img {
     width: 100%;
-    height: 430px;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
-    border-radius: 22px;
+    border-radius: 14px;
 }
 
-/* Prompt */
+/* ===============================
+   PROMPT SECTION
+================================ */
+
 .lightbox-prompt {
-    margin-top: 28px;
+    margin-top: 14px;
 }
 
 .prompt-header {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--muted);
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .lightbox-prompt pre {
     background: #050816;
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 20px;
-    font-size: 14px;
-    line-height: 1.65;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 13px;
+    line-height: 1.6;
     white-space: pre-wrap;
     color: #d4d9ff;
+    max-height: 180px;
+    overflow-y: auto;
 }
 
-/* Button */
+/* ===============================
+   BUTTON
+================================ */
+
 .lightbox-prompt button {
-    margin-top: 18px;
+    margin-top: 12px;
     width: 100%;
-    padding: 15px;
-    border-radius: 18px;
+    padding: 14px;
+    border-radius: 14px;
     border: none;
     background: linear-gradient(135deg, #6ee7ff, #3b82f6);
     font-weight: 600;
+    font-size: 14px;
     cursor: pointer;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-    .lightbox-images {
-        grid-template-columns: 1fr;
-    }
-
-    .img-box img {
-        height: 300px;
-    }
-
-    .site-header h1 {
-        font-size: 2.4rem;
-    }
+.lightbox-prompt button:active {
+    transform: scale(0.97);
 }
