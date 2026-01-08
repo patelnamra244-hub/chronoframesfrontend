@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api/templates";
+const API = "https://chronoframesbackend.onrender.com/api/templates";
 
 const grid = document.getElementById("templateList");
 const lightbox = document.getElementById("lightbox");

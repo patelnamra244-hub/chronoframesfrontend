@@ -1,4 +1,4 @@
-fetch("http://localhost:5000/api/templates/stats/dashboard")
+fetch("https://chronoframesbackend.onrender.com/api/templates/stats/dashboard")
     .then(res => res.json())
     .then(data => {
         document.getElementById("views").innerText = data.views;
